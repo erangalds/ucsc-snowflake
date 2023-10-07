@@ -1,0 +1,45 @@
+MEASURE 'Sales'[Sum of quantity] = SUM('Sales'[quantity])
+    Description = "This measure is the sum of column 'Sales'[quantity]"
+    DisplayFolder = "_Base Measures"
+    FormatString = "0.00"
+
+MEASURE 'Sales'[Sum of quantity YTD] = TOTALYTD([Sum of quantity], 'Calendar'[Date])
+    DisplayFolder = "_Time Intelligence"
+
+MEASURE 'Sales'[Sum of quantity PY] = CALCULATE([Sum of quantity], SAMEPERIODLASTYEAR('Calendar'[Date]))
+    DisplayFolder = "_Time Intelligence"
+
+MEASURE 'Sales'[Sum of quantity YoY] = [Sum of quantity] - [Sum of quantity PY]
+    DisplayFolder = "_Time Intelligence"
+
+MEASURE 'Sales'[Sum of quantity YoY%] = DIVIDE([Sum of quantity], [Sum of quantity YoY])
+    DisplayFolder = "_Time Intelligence"
+    FormatString = "0.0 %"
+
+MEASURE 'Sales'[Sum of quantity QTD] = TOTALQTD([Sum of quantity], 'Calendar'[Date])
+    DisplayFolder = "_Time Intelligence"
+
+MEASURE 'Sales'[Sum of quantity MTD] = TOTALMTD([Sum of quantity], 'Calendar'[Date])
+    DisplayFolder = "_Time Intelligence"
+
+MEASURE 'Sales'[Sales YTD] = TOTALYTD([Sales], 'Calendar'[Date])
+    DisplayFolder = "_Time Intelligence"
+
+MEASURE 'Sales'[Sales PY] = CALCULATE([Sales], SAMEPERIODLASTYEAR('Calendar'[Date]))
+    DisplayFolder = "_Time Intelligence"
+
+MEASURE 'Sales'[Sales YoY] = [Sales] - [Sales PY]
+    DisplayFolder = "_Time Intelligence"
+
+MEASURE 'Sales'[Sales YoY%] = DIVIDE([Sales], [Sales YoY])
+    DisplayFolder = "_Time Intelligence"
+    FormatString = "0.0 %"
+
+MEASURE 'Sales'[Sales QTD] = TOTALQTD([Sales], 'Calendar'[Date])
+    DisplayFolder = "_Time Intelligence"
+
+MEASURE 'Sales'[Sales MTD] = TOTALMTD([Sales], 'Calendar'[Date])
+    DisplayFolder = "_Time Intelligence"
+
+MEASURE 'Sales'[Sales] = CALCULATE( SUMX( 'Sales', 'Sales'[quantity] * RELATED( 'Products'[product_retail_price])))
+    , DisplayFolder = "_Base Measures"

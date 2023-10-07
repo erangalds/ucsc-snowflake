@@ -1,0 +1,34 @@
+MEASURE 'Sales'[Total Cost] = 
+CALCULATE(
+    // Total Cost --> Quantity x Product Unit Cost
+    SUMX(
+        'Sales',
+        // Product Cost is in Products table hence using the Related Function
+        'Sales'[quantity] * RELATED( 'Products'[product_cost] ) 
+    )//End of SUMX
+)//End of Calculate Function 
+
+MEASURE 'Sales'[Total Sales] = 
+CALCULATE(
+    SUMX( 
+        // Total Sales --> Quantity x Product Retail Price
+        'Sales',
+        // Product Retails Price is in the products table which hence using the related function
+        'Sales'[quantity] * RELATED( 'Products'[product_retail_price] )
+    )//End of SUMX
+)//End of Calculate Function
+
+MEASURE 'Sales'[Total Sales Quantity] = 
+CALCULATE(
+    // Total Quanty --> Sum the quantity sold
+    SUM( 'Sales'[quantity] )
+)//end of Calculate function MEASURE
+
+MEASURE 'Sales'[Sales Margin] = 
+// Total Sales - Total Cost --> Margin
+[Total Sales] - [Total Cost]
+
+
+
+
+
