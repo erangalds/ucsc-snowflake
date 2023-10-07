@@ -27,7 +27,7 @@ select
     current_schemas();
 
 -- Directly selecting a schema
-create database myfirst_db;
+create or replace database myfirst_db;
 
 show databases;
 
@@ -40,3 +40,6 @@ select
 
 -- Cleaning up the environment
 drop database myfirst_db;
+-- Verify the deletion of the database
+show databases;
+
