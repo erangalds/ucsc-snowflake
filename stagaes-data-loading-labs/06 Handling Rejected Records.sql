@@ -1,5 +1,14 @@
 // We are going to talk about how to handle the ERROR records / Rejected Records
 ---- Use files with errors ----
+select current_role();
+use role sysadmin;
+use database our_first_db;
+select current_database();
+show schemas;
+use schema public;
+select current_schema();
+show tables;
+
 CREATE OR REPLACE STAGE COPY_DB.PUBLIC.aws_stage_copy
     url='s3://snowflakebucket-copyoption/returnfailed/';
 
@@ -7,18 +16,20 @@ LIST @COPY_DB.PUBLIC.aws_stage_copy;
 
 //Trying to load the data into a table
 COPY INTO COPY_DB.PUBLIC.ORDERS
-    FROM @aws_stage_copy
+    FROM @COPY_DB.PUBLIC.aws_stage_copy
     file_format= (type = csv field_delimiter=',' skip_header=1)
     pattern='.*Order.*'
-    VALIDATION_MODE = RETURN_ERRORS
-
+    VALIDATION_MODE = RETURN_ERRORS;
+-- For each failed record we can see from which file the error record was found as well as the actual error record
+-- We can't any valid records out
 COPY INTO COPY_DB.PUBLIC.ORDERS
-    FROM @aws_stage_copy
+    FROM @COPY_DB.PUBLIC.aws_stage_copy
     file_format= (type = csv field_delimiter=',' skip_header=1)
     pattern='.*Order.*'
-    VALIDATION_MODE = RETURN_1_rows
+    VALIDATION_MODE = RETURN_1_rows;
     
 
+-- Let's say that we want to captuer the rejected records / error records into a separate table for future actions
 -------------- Working with error results -----------
 
 ---- 1) Saving rejected files after VALIDATION_MODE ---- 
@@ -32,14 +43,24 @@ CREATE OR REPLACE TABLE  COPY_DB.PUBLIC.ORDERS (
     SUBCATEGORY VARCHAR(30));
 
 COPY INTO COPY_DB.PUBLIC.ORDERS
-    FROM @aws_stage_copy
+    FROM @COPY_DB.PUBLIC.aws_stage_copy
     file_format= (type = csv field_delimiter=',' skip_header=1)
     pattern='.*Order.*'
     VALIDATION_MODE = RETURN_ERRORS;
 
+select * from table(result_scan(last_query_id()));
+SET qid = LAST_QUERY_ID();
+
+CREATE OR REPLACE TABLE rejected AS 
+SELECT rejected_record 
+FROM TABLE (RESULT_SCAN ($qid));
+
+
 // Storing rejected /failed results in a table
 CREATE OR REPLACE TABLE rejected AS 
 select rejected_record from table(result_scan(last_query_id()));
+
+
 
 SELECT * FROM rejected;
 

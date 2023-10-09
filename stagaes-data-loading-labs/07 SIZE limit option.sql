@@ -27,3 +27,7 @@ COPY INTO COPY_DB.PUBLIC.ORDERS
     file_format= (type = csv field_delimiter=',' skip_header=1)
     pattern='.*Order.*'
     SIZE_LIMIT=20000;
+
+-- The SIZE_LIMIT limits the size of the source file which we plan to load
+-- SIZE_LIMIT has a default where it will load the last file anyway 
+-- irrespective of the size of the file
