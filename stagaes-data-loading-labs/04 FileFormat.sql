@@ -1,6 +1,21 @@
 // Using FILEFORMAT Objects
 // Specifying file_format in Copy command
 // What we are trying to do is taking that FILE_FORMAT options into a separate definition for easy re-usability
+select current_role();
+use role sysadmin;
+use database our_first_db;
+select current_database();
+show schemas;
+use schema public;
+select current_schema();
+show tables;
+
+-- Since we careated this orders_ex table in our last lab,let's see whether we have data loaded already.
+select * from our_first_db.public.orders_ex;
+-- If the table is present let's truncate the data
+truncate table if exists our_first_db.public.orders_ex;
+-- validate the truncate
+select * from our_first_db.public.orders_ex;
 COPY INTO OUR_FIRST_DB.PUBLIC.ORDERS_EX
     FROM @MANAGE_DB.external_stages.aws_stage_errorex
     file_format = (type = csv field_delimiter=',' skip_header=1)
