@@ -1,6 +1,8 @@
 // Defaut behaviour of Snowflake is such that, it will not load a source file, into a table,
 // if it was loaded previously
 // But we can change that behaviour and force snowflake to load previously loaded files. 
+select current_role();
+use role sysadmin;
 
 CREATE OR REPLACE TABLE  COPY_DB.PUBLIC.ORDERS (
     ORDER_ID VARCHAR(30),

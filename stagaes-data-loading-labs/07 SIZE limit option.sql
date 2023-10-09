@@ -1,5 +1,6 @@
 // Controling the Data Loading based on the loaded data size using SIZE_LIMIT
-
+select current_role();
+use role sysadmin;
 // Prepare database & table
 CREATE OR REPLACE DATABASE COPY_DB;
 

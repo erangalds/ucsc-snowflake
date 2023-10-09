@@ -2,13 +2,6 @@
 ---- TRUNCATECOLUMNS ----
 select current_role();
 use role sysadmin;
-use database our_first_db;
-select current_database();
-show schemas;
-use schema public;
-select current_schema();
-show tables;
-
 CREATE OR REPLACE TABLE  COPY_DB.PUBLIC.ORDERS (
     ORDER_ID VARCHAR(30),
     AMOUNT VARCHAR(30),

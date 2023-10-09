@@ -2,12 +2,6 @@
 ---- Use files with errors ----
 select current_role();
 use role sysadmin;
-use database our_first_db;
-select current_database();
-show schemas;
-use schema public;
-select current_schema();
-show tables;
 
 CREATE OR REPLACE STAGE COPY_DB.PUBLIC.aws_stage_copy
     url='s3://snowflakebucket-copyoption/returnfailed/';

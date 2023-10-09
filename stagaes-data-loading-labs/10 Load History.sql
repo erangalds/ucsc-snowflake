@@ -1,6 +1,8 @@
 // Sometimes its important for us to know what data, from which files got loaded to which table. 
 // These meta data is stored in a separte schema in the database called information_schema 
 // Query load history within a database
+select current_role();
+use role sysadmin;
 
 USE COPY_DB;
 -- by calling the load_history view we can get the entire load history for the database. 

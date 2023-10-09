@@ -4,12 +4,6 @@
 -- Snowflkae provide a Validation Option for this kind of requirements. 
 select current_role();
 use role sysadmin;
-use database our_first_db;
-select current_database();
-show schemas;
-use schema public;
-select current_schema();
-show tables;
 
 -- Creating a new database for the lab
 // Prepare database & table
