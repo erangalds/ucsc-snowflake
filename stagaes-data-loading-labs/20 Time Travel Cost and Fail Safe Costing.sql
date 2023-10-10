@@ -1,6 +1,6 @@
 // Fail Safe feature
 // Storage usage on account level
-
+use role accountadmin;
 SELECT * FROM SNOWFLAKE.ACCOUNT_USAGE.STORAGE_USAGE ORDER BY USAGE_DATE DESC;
 
 
