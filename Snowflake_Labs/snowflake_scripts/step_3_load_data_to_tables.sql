@@ -1,5 +1,9 @@
 /* Copying the DATA FROM CSV FILES INTO target TABLES */
 /* Customers Table */
+use role sysadmin;
+use warehouse compute_wh;
+use schema maven_market.sales;
+select current_role(), current_warehouse(), current_database(), current_schema();
 copy into maven_market.sales.Customers
 from @maven_market_manage.stages.maven_market_dimensions/MavenMarket_Customers.csv 
 file_format=( type = csv field_delimiter = ',' skip_header = 1 FIELD_OPTIONALLY_ENCLOSED_BY = '"');
@@ -33,8 +37,9 @@ SELECT * FROM maven_market.sales.STORES;
 
 /* Stores */
 copy into maven_market.sales.Returns
-from @maven_market_manage.stages.maven_market_dimensions/MavenMarket_Returns_1997-1998.csv
-file_format=( type = csv field_delimiter = ',' skip_header = 1 FIELD_OPTIONALLY_ENCLOSED_BY = '"');
+from @maven_market_manage.stages.maven_market_facts/MavenMarket_Returns_1997-1998.csv
+file_format=( type = csv field_delimiter = ',' skip_header = 1 FIELD_OPTIONALLY_ENCLOSED_BY = '"')
+FORCE = TRUE;
 
 /* Verifying the DATA LOAD */ 
 SELECT * FROM maven_market.sales.RETURNS;

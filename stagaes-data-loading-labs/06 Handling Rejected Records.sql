@@ -44,9 +44,9 @@ COPY INTO COPY_DB.PUBLIC.ORDERS
 
 select * from table(result_scan(last_query_id()));
 SET qid = LAST_QUERY_ID();
-
+-- 01af9f22-0000-7883-0003-df4a0012308e
 CREATE OR REPLACE TABLE rejected AS 
-SELECT rejected_record 
+SELECT REJECTED_RECORD 
 FROM TABLE (RESULT_SCAN ($qid));
 
 
@@ -64,6 +64,13 @@ select rejected_record from table(result_scan(last_query_id()));
 SELECT * FROM rejected;
 
 ---- 2) Saving rejected files without VALIDATION_MODE ---- 
+CREATE OR REPLACE TABLE  COPY_DB.PUBLIC.ORDERS (
+    ORDER_ID VARCHAR(30),
+    AMOUNT VARCHAR(30),
+    PROFIT INT,
+    QUANTITY INT,
+    CATEGORY VARCHAR(30),
+    SUBCATEGORY VARCHAR(30));
 
 COPY INTO COPY_DB.PUBLIC.ORDERS
     FROM @aws_stage_copy
@@ -72,12 +79,15 @@ COPY INTO COPY_DB.PUBLIC.ORDERS
     ON_ERROR=CONTINUE;
   
   
+create or replace table rejected_v2 as 
 select * from table(validate(orders, job_id => '_last'));
 
+select * from table(validate(orders, job_id => '_last'));
 
+select * from rejected_v2;
 ---- 3) Working with rejected records ---- 
 
-SELECT REJECTED_RECORD FROM rejected;
+SELECT REJECTED_RECORD FROM rejected_v2;
 
 CREATE OR REPLACE TABLE rejected_values as
 SELECT 
@@ -87,7 +97,7 @@ SPLIT_PART(rejected_record,',',3) as PROFIT,
 SPLIT_PART(rejected_record,',',4) as QUATNTITY, 
 SPLIT_PART(rejected_record,',',5) as CATEGORY, 
 SPLIT_PART(rejected_record,',',6) as SUBCATEGORY
-FROM rejected; 
+FROM rejected_v2; 
 
 
 SELECT * FROM rejected_values;

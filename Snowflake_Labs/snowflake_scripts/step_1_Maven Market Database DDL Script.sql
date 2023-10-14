@@ -1,8 +1,14 @@
 /* Creating the Database Named: Maven_market */
+use role sysadmin;
+use warehouse compute_wh;
+select current_role(), current_warehouse();
+--listing the databases
+show databases;
+drop database if exists maven_market;
 CREATE DATABASE maven_market;
 /* Creating a Schema for Sales Data */
 CREATE SCHEMA sales;
-
+select current_role(), current_warehouse(), current_database(), current_schema();
 /* Creating the TABLES */
 create or replace table maven_market.sales.Customers(
     customer_id number not null,
