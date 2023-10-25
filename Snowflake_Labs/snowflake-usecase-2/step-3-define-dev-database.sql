@@ -4,30 +4,33 @@
 /* Login as the SYSADMIN and create these databases */
 -- SYSADMIN - Yometh
 -- Checking for current Databases
+use role sysadmin;
+use warehouse common_wh;
+select current_role(), current_warehouse();
 SHOW DATABASES;
 /* Creating the Database */
-CREATE DATABASE dev_maven_market;
+CREATE or replace DATABASE dev_maven_market;
 /* Creating the Schemas */
 -- Select the dev_maven_market database and create the schemas
 /* Sales Schema */
-CREATE SCHEMA dev_maven_market.sales;
+CREATE or replace SCHEMA dev_maven_market.sales;
 /* Customer Support Schema */
-CREATE SCHEMA dev_maven_market.customer_support;
+CREATE or replace SCHEMA dev_maven_market.customer_support;
 /* Marketting Schema */
-CREATE SCHEMA dev_maven_market.marketting;
+CREATE or replace SCHEMA dev_maven_market.marketting;
 
 
 /* Creating the Database */
-CREATE DATABASE dev_maven_manage;
+CREATE or replace DATABASE dev_maven_manage;
 /* Creating the Schemas */
 -- Separate database to keep the stage objects and file formats
 -- Select the dev_maven_manage database and create the schemas
 /* Sales Schema */
-CREATE SCHEMA dev_maven_manage.sales;
+CREATE or replace SCHEMA dev_maven_manage.sales;
 /* Customer Support Schema */
-CREATE SCHEMA dev_maven_manage.customer_support;
+CREATE or replace SCHEMA dev_maven_manage.customer_support;
 /* Marketting Schema */
-CREATE SCHEMA dev_maven_manage.marketting;
+CREATE or replace SCHEMA dev_maven_manage.marketting;
 
 /* Granting Permission to the respective DBAs */
 /* Sales Division */
@@ -39,40 +42,34 @@ CREATE SCHEMA dev_maven_manage.marketting;
 -- Maven Manage Database --
 GRANT ALL ON SCHEMA dev_maven_manage.sales TO ROLE SALES_DBA;
 -- Checking whether Dasun can create any objects etc. like tables
+-- Log in as Dasun and check whether he can create a table
 CREATE TABLE dev_maven_manage.sales.test ( name string );
 -- Granting USAGE permission to SALES_DBA Role
 GRANT USAGE ON SCHEMA dev_maven_manage.sales TO ROLE SALES_DBA;
 GRANT USAGE ON DATABASE dev_maven_manage TO ROLE SALES_DBA;
--- DROP TEST TABLE
-DROP TABLE dev_maven_manage.sales.test;
 -- Granting SELECT (Read Only) Priviledge to SALES_ANALYST Role
 GRANT SELECT ON ALL TABLES IN SCHEMA dev_maven_manage.sales TO ROLE SALES_ANALYST;
--- Create a Sample Table
-CREATE TABLE dev_maven_manage.sales.test ( name string );
 -- Granting USAGE permission to SALES_ANALYST Role
 GRANT USAGE ON SCHEMA dev_maven_manage.sales TO ROLE SALES_ANALYST;
 GRANT USAGE ON DATABASE dev_maven_manage TO ROLE SALES_ANALYST;
--- IDEAL WAY TO GRANT SELECT INCLUDING FOR FUTURE TABLES
-GRANT SELECT ON FUTURE TABLES IN SCHEMA dev_maven_manage.sales TO ROLE SALES_ANALYST;
+-- Now check whether Nimasha can see the table 
+
 -- ------------------------------------------------------------------------- --
 -- Maven Dev Database --
 GRANT ALL ON SCHEMA dev_maven_market.sales TO ROLE SALES_DBA;
--- Checking whether Dasun can create any objects etc. like tables
-CREATE TABLE dev_maven_market.sales.test ( name string );
 -- Granting USAGE permission to SALES_DBA Role
 GRANT USAGE ON SCHEMA dev_maven_market.sales TO ROLE SALES_DBA;
 GRANT USAGE ON DATABASE dev_maven_market TO ROLE SALES_DBA;
--- DROP TEST TABLE
-DROP TABLE dev_maven_market.sales.test;
+-- Login as Dasun and check below
+-- Checking whether Dasun can create any objects etc. like tables
+CREATE TABLE dev_maven_market.sales.test ( name string );
 -- Granting SELECT (Read Only) Priviledge to SALES_ANALYST Role
 GRANT SELECT ON ALL TABLES IN SCHEMA dev_maven_market.sales TO ROLE SALES_ANALYST;
--- Create a Sample Table
-CREATE TABLE dev_maven_market.sales.test ( name string );
 -- Granting USAGE permission to SALES_ANALYST Role
 GRANT USAGE ON SCHEMA dev_maven_market.sales TO ROLE SALES_ANALYST;
 GRANT USAGE ON DATABASE dev_maven_market TO ROLE SALES_ANALYST;
--- IDEAL WAY TO GRANT SELECT INCLUDING FOR FUTURE TABLES
-GRANT SELECT ON FUTURE TABLES IN SCHEMA dev_maven_market.sales TO ROLE SALES_ANALYST;
+-- Now check whether Nimasha can read the table. 
+
 
 
 
@@ -194,6 +191,12 @@ GRANT SELECT ON FUTURE TABLES IN SCHEMA dev_maven_market.marketting TO ROLE MARK
 
 
 
+-- Providing SELECT Privilege for Future Tables
+-- Login as Accountadmin and provide the below permissions. 
+-- IDEAL WAY TO GRANT SELECT INCLUDING FOR FUTURE TABLES
+GRANT SELECT ON FUTURE TABLES IN SCHEMA dev_maven_manage.sales TO ROLE SALES_ANALYST;
+-- IDEAL WAY TO GRANT SELECT INCLUDING FOR FUTURE TABLES
+GRANT SELECT ON FUTURE TABLES IN SCHEMA dev_maven_market.sales TO ROLE SALES_ANALYST;
 
 
 

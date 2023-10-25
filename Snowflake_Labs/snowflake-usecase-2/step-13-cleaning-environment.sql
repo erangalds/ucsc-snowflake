@@ -28,6 +28,12 @@ drop role datascientist;
 drop role marketing_analyst;
 drop role marketing_dba;
 
+-- Checking for Databases to clean
+-- Listing down all the databases;
+show databases;
+drop database dev_maven_market;
+drop database dev_maven_manage;
+
 
 
 
