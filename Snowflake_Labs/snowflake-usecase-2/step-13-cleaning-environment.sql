@@ -30,6 +30,7 @@ drop role marketing_dba;
 
 -- Checking for Databases to clean
 -- Listing down all the databases;
+use role sysadmin;
 show databases;
 drop database dev_maven_market;
 drop database dev_maven_manage;
@@ -42,6 +43,12 @@ drop warehouse sales_wh;
 drop warehouse customer_support_wh;
 drop warehouse datascience_wh;
 drop warehouse marketting_wh;
+
+-- Droping Storage Integration Objects
+
+use role accountadmin;
+drop database ST_INT_TEST;
+drop storage integration ucsc_int;
 
 
 
