@@ -82,41 +82,29 @@ GRANT USAGE ON DATABASE dev_maven_market TO ROLE SALES_ANALYST;
 -- Maven Manage Database -- 
 -- Maven Manage Database --
 GRANT ALL ON SCHEMA dev_maven_manage.customer_support TO ROLE CUSTOMER_SUPPORT_DBA;
--- Checking whether Dasun can create any objects etc. like tables
-CREATE TABLE dev_maven_manage.customer_support.test ( name string );
 -- Granting USAGE permission to SALES_DBA Role
 GRANT USAGE ON SCHEMA dev_maven_manage.customer_support TO ROLE CUSTOMER_SUPPORT_DBA;
 GRANT USAGE ON DATABASE dev_maven_manage TO ROLE CUSTOMER_SUPPORT_DBA;
--- DROP TEST TABLE
-DROP TABLE dev_maven_manage.customer_support.test;
+-- Checking whether Nalaka can create any objects etc. like tables
+CREATE TABLE dev_maven_manage.customer_support.test ( name string );
 -- Granting SELECT (Read Only) Priviledge to SALES_ANALYST Role
 GRANT SELECT ON ALL TABLES IN SCHEMA dev_maven_manage.customer_support TO ROLE CUSTOMER_SUPPORT_ANALYST;
--- Create a Sample Table
-CREATE TABLE dev_maven_manage.customer_support.test ( name string );
 -- Granting USAGE permission to SALES_ANALYST Role
 GRANT USAGE ON SCHEMA dev_maven_manage.customer_support TO ROLE CUSTOMER_SUPPORT_ANALYST;
 GRANT USAGE ON DATABASE dev_maven_manage TO ROLE CUSTOMER_SUPPORT_ANALYST;
--- IDEAL WAY TO GRANT SELECT INCLUDING FOR FUTURE TABLES
-GRANT SELECT ON FUTURE TABLES IN SCHEMA dev_maven_manage.customer_support TO ROLE CUSTOMER_SUPPORT_ANALYST;
 -- ------------------------------------------------------------------------- --
 -- Maven Dev Database --
 GRANT ALL ON SCHEMA dev_maven_market.customer_support TO ROLE CUSTOMER_SUPPORT_DBA;
--- Checking whether Dasun can create any objects etc. like tables
-CREATE TABLE dev_maven_market.customer_support.test ( name string );
 -- Granting USAGE permission to DATASCIENTIST Role
 GRANT USAGE ON SCHEMA dev_maven_market.customer_support TO ROLE CUSTOMER_SUPPORT_DBA;
 GRANT USAGE ON DATABASE dev_maven_market TO ROLE CUSTOMER_SUPPORT_DBA;
--- DROP TEST TABLE
-DROP TABLE dev_maven_market.customer_support.test;
+-- Checking whether Nalaka can create any objects etc. like tables
+CREATE TABLE dev_maven_market.customer_support.test ( name string );
 -- Granting SELECT (Read Only) Priviledge to SALES_ANALYST Role
 GRANT SELECT ON ALL TABLES IN SCHEMA dev_maven_market.customer_support TO ROLE CUSTOMER_SUPPORT_ANALYST;
--- Create a Sample Table
-CREATE TABLE dev_maven_market.customer_support.test ( name string );
 -- Granting USAGE permission to SALES_ANALYST Role
 GRANT USAGE ON SCHEMA dev_maven_market.customer_support TO ROLE CUSTOMER_SUPPORT_ANALYST;
 GRANT USAGE ON DATABASE dev_maven_market TO ROLE CUSTOMER_SUPPORT_ANALYST;
--- IDEAL WAY TO GRANT SELECT INCLUDING FOR FUTURE TABLES
-GRANT SELECT ON FUTURE TABLES IN SCHEMA dev_maven_market.customer_support TO ROLE CUSTOMER_SUPPORT_ANALYST;
 
 
 
@@ -147,56 +135,53 @@ GRANT USAGE ON DATABASE dev_maven_market TO ROLE CUSTOMER_SUPPORT_DBA;
 /* Marketting */
 -- Marketting Analyst - wasana
 -- Marketting Analyst Role - MARKETTING_ANALYST
--- Marketting DBA - nalaka
+-- Marketting DBA - Priyashan
 -- Marketting DBA Role - MARKETTING_DBA
 -- Granting ALL Priviledge to Marketting DBA
 -- Maven Manage Database -- 
 -- Maven Manage Database --
 GRANT ALL ON SCHEMA dev_maven_manage.marketting TO ROLE MARKETTING_DBA;
--- Checking whether Dasun can create any objects etc. like tables
-CREATE TABLE dev_maven_manage.marketting.test ( name string );
 -- Granting USAGE permission to SALES_DBA Role
 GRANT USAGE ON SCHEMA dev_maven_manage.marketting TO ROLE MARKETTING_DBA;
 GRANT USAGE ON DATABASE dev_maven_manage TO ROLE MARKETTING_DBA;
--- DROP TEST TABLE
-DROP TABLE dev_maven_manage.marketting.test;
+-- Checking whether Priyashan can create any objects etc. like tables
+CREATE TABLE dev_maven_manage.marketting.test ( name string );
 -- Granting SELECT (Read Only) Priviledge to SALES_ANALYST Role
 GRANT SELECT ON ALL TABLES IN SCHEMA dev_maven_manage.marketting TO ROLE MARKETTING_ANALYST;
--- Create a Sample Table
-CREATE TABLE dev_maven_manage.marketting.test ( name string );
 -- Granting USAGE permission to SALES_ANALYST Role
 GRANT USAGE ON SCHEMA dev_maven_manage.marketting TO ROLE MARKETTING_ANALYST;
 GRANT USAGE ON DATABASE dev_maven_manage TO ROLE MARKETTING_ANALYST;
--- IDEAL WAY TO GRANT SELECT INCLUDING FOR FUTURE TABLES
-GRANT SELECT ON FUTURE TABLES IN SCHEMA dev_maven_manage.marketting TO ROLE MARKETTING_ANALYST;
 -- ------------------------------------------------------------------------- --
 -- Maven Dev Database --
 GRANT ALL ON SCHEMA dev_maven_market.marketting TO ROLE MARKETTING_DBA;
--- Checking whether Dasun can create any objects etc. like tables
-CREATE TABLE dev_maven_market.marketting.test ( name string );
 -- Granting USAGE permission to DATASCIENTIST Role
 GRANT USAGE ON SCHEMA dev_maven_market.marketting TO ROLE MARKETTING_DBA;
 GRANT USAGE ON DATABASE dev_maven_market TO ROLE MARKETTING_DBA;
--- DROP TEST TABLE
-DROP TABLE dev_maven_market.marketting.test;
+-- Checking whether Priyashan can create any objects etc. like tables
+CREATE TABLE dev_maven_market.marketting.test ( name string );
 -- Granting SELECT (Read Only) Priviledge to SALES_ANALYST Role
 GRANT SELECT ON ALL TABLES IN SCHEMA dev_maven_market.marketting TO ROLE MARKETTING_ANALYST;
--- Create a Sample Table
-CREATE TABLE dev_maven_market.marketting.test ( name string );
 -- Granting USAGE permission to SALES_ANALYST Role
 GRANT USAGE ON SCHEMA dev_maven_market.marketting TO ROLE MARKETTING_ANALYST;
 GRANT USAGE ON DATABASE dev_maven_market TO ROLE MARKETTING_ANALYST;
--- IDEAL WAY TO GRANT SELECT INCLUDING FOR FUTURE TABLES
-GRANT SELECT ON FUTURE TABLES IN SCHEMA dev_maven_market.marketting TO ROLE MARKETTING_ANALYST;
 
 
 
 -- Providing SELECT Privilege for Future Tables
 -- Login as Accountadmin and provide the below permissions. 
 -- IDEAL WAY TO GRANT SELECT INCLUDING FOR FUTURE TABLES
+use role accountadmin;
 GRANT SELECT ON FUTURE TABLES IN SCHEMA dev_maven_manage.sales TO ROLE SALES_ANALYST;
 -- IDEAL WAY TO GRANT SELECT INCLUDING FOR FUTURE TABLES
 GRANT SELECT ON FUTURE TABLES IN SCHEMA dev_maven_market.sales TO ROLE SALES_ANALYST;
+-- IDEAL WAY TO GRANT SELECT INCLUDING FOR FUTURE TABLES
+GRANT SELECT ON FUTURE TABLES IN SCHEMA dev_maven_manage.customer_support TO ROLE CUSTOMER_SUPPORT_ANALYST;
+-- IDEAL WAY TO GRANT SELECT INCLUDING FOR FUTURE TABLES
+GRANT SELECT ON FUTURE TABLES IN SCHEMA dev_maven_market.customer_support TO ROLE CUSTOMER_SUPPORT_ANALYST;
+-- IDEAL WAY TO GRANT SELECT INCLUDING FOR FUTURE TABLES
+GRANT SELECT ON FUTURE TABLES IN SCHEMA dev_maven_manage.marketting TO ROLE MARKETTING_ANALYST;
+-- IDEAL WAY TO GRANT SELECT INCLUDING FOR FUTURE TABLES
+GRANT SELECT ON FUTURE TABLES IN SCHEMA dev_maven_market.marketting TO ROLE MARKETTING_ANALYST;
 
 
 
