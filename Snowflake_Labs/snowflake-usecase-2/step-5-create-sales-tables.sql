@@ -2,6 +2,8 @@
 -- Login as SALES_DBA and create the 
 -- Sales DBA - Dasun
 -- Verify that he can see the dev_maven_market.sales database and schema
+use role sales_dba;
+use warehouse sales_wh;
 SHOW DATABASES;
 -- Selecting the dev_maven_market database
 USE dev_maven_market;
@@ -9,7 +11,7 @@ USE dev_maven_market;
 SHOW SCHEMAS;
 -- Selecting Sales Schema for Table Creation
 USE dev_maven_market.sales;
-
+select current_role(), current_warehouse, current_database(),current_schema();
 -- Creating Tables
 -- Customers Table
 create or replace table dev_maven_market.sales.Customers(
