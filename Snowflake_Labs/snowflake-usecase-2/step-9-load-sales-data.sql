@@ -1,13 +1,18 @@
 /* Loading Sales Data */
 -- Login as SALES_DBA - Dasun 
+use role sales_dba;
+use warehouse sales_wh;
+use schema dev_maven_market.sales;
+select current_role(), current_warehouse(), current_database(),current_schema();
 /* Copying the DATA FROM CSV FILES INTO target TABLES */
+list @dev_maven_manage.sales.maven_market_dimensions;
 /* Customers Table */
 copy into dev_maven_market.sales.Customers
 from @dev_maven_manage.sales.maven_market_dimensions/MavenMarket_Customers.csv 
 file_format=(FORMAT_NAME = dev_maven_manage.sales.csv_format);
 
 /* Verifying the DATA LOAD */ 
-SELECT * FROM maven_market.sales.CUSTOMERS;
+SELECT * FROM dev_maven_market.sales.CUSTOMERS;
 
 /* Product */
 copy into dev_maven_market.sales.Products
