@@ -34,6 +34,16 @@ show databases;
 drop database dev_maven_market;
 drop database dev_maven_manage;
 
+-- Checking on the Virtual Warehouses
+-- Listing the warehouses
+show warehouses;
+drop warehouse common_wh;
+drop warehouse sales_wh;
+drop warehouse customer_support_wh;
+drop warehouse datascience_wh;
+drop warehouse marketting_wh;
+
+
 
 
 
