@@ -1,11 +1,14 @@
 /* CREATE a USER FOR SECURITY admin ROLE */
+use role useradmin;
 CREATE USER yometh PASSWORD = 'ucsc1234' DEFAULT_ROLE = SECURITYADMIN MUST_CHANGE_PASSWORD = FALSE;
+use role securityadmin;
 GRANT ROLE SECURITYADMIN TO USER yometh;
 -- using the New Security Admin Role to create the new custom roles and users
 
 -- create a role for marketing database administrators
 -- people in this role will be able to create manage objects
 -- in marketing database
+use role useradmin;
 CREATE ROLE MARKETING_DBA;
 
 -- create a role for marketing analyst users

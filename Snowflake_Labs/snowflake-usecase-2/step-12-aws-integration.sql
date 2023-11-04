@@ -1,5 +1,8 @@
 /* Setting up AWS and Snowflake Storage Integration Object */
-
+use role accountadmin;
+show storage integrations;
+drop storage integration ucsc_int;
+use warehouse common_wh;
 CREATE OR REPLACE STORAGE INTEGRATION ucsc_int
     TYPE = EXTERNAL_STAGE
     STORAGE_PROVIDER = S3
@@ -26,7 +29,7 @@ CREATE OR REPLACE DATABASE ST_INT_TEST;
 CREATE SCHEMA ST_INT_TEST.TEST;
 
 CREATE OR REPLACE STAGE ST_INT_TEST.TEST.AWS_S3_STAGE
-    URL = 's3://s3://ucsc-snowflake/sales/'
+    URL = 's3://ucsc-snowflake/sales/'
     STORAGE_INTEGRATION = ucsc_int
     FILE_FORMAT = dev_maven_manage.sales.csv_format;
 

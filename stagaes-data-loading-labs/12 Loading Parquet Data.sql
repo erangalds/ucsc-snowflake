@@ -1,7 +1,8 @@
 // PARQUET is one of the most famous data types. The main reason is its high compression capabilities
 // Snowflake has speacial features to handle parquet data files. 
-
-// Create file format
+use role sysadmin;
+select current_role();
+// Create file format object for the parquet object type
 CREATE OR REPLACE FILE FORMAT MANAGE_DB.FILE_FORMATS.PARQUET_FORMAT
     TYPE = 'parquet';
 // Create a stage object
@@ -12,18 +13,22 @@ CREATE OR REPLACE STAGE MANAGE_DB.EXTERNAL_STAGES.PARQUETSTAGE
 // Preview the data sitting in the Stage without loading into snowflake
 // Listing the files in the stage 
 LIST  @MANAGE_DB.EXTERNAL_STAGES.PARQUETSTAGE;   
-// Looking at the data in the stage    
+// Looking at the data in the stage  
+-- We can query the data in the stage with a select query directly even without getting them loaded   
 SELECT * FROM @MANAGE_DB.EXTERNAL_STAGES.PARQUETSTAGE;
     
 
-// Its convenient to use the file format object in the stage otherwise we have specifically mention that
+// Its convenient to use the file format object in the stage 
+-- otherwise we have to specifically mention that
+-- Let's see what will happen if we don't specify the file type
 // File format in Queries
 CREATE OR REPLACE STAGE MANAGE_DB.EXTERNAL_STAGES.PARQUETSTAGE
     url = 's3://snowflakeparquetdemo';  
     
 SELECT * 
 FROM @MANAGE_DB.EXTERNAL_STAGES.PARQUETSTAGE;
-
+-- Snowflake is not able to figure out what the file format / type is. 
+-- In such cases we can manually override the file format in the select query
 SELECT * 
 FROM @MANAGE_DB.EXTERNAL_STAGES.PARQUETSTAGE
 (file_format => 'MANAGE_DB.FILE_FORMATS.PARQUET_FORMAT');
@@ -33,14 +38,14 @@ USE MANAGE_DB.FILE_FORMATS;
 
 SELECT * 
 FROM @MANAGE_DB.EXTERNAL_STAGES.PARQUETSTAGE
-(file_format => MANAGE_DB.FILE_FORMATS.PARQUET_FORMAT)
+(file_format => MANAGE_DB.FILE_FORMATS.PARQUET_FORMAT);
 
 
 CREATE OR REPLACE STAGE MANAGE_DB.EXTERNAL_STAGES.PARQUETSTAGE
     url = 's3://snowflakeparquetdemo'   
     FILE_FORMAT = MANAGE_DB.FILE_FORMATS.PARQUET_FORMAT;
 
-// Syntax for Querying unstructured data in the parquet data file
+// Syntax for Querying Semistructured data in the parquet data file
 SELECT 
 $1:__index_level_0__,
 $1:cat_id,
@@ -107,9 +112,9 @@ CREATE OR REPLACE TABLE OUR_FIRST_DB.PUBLIC.PARQUET_DATA (
     state_id VARCHAR(50),
     store_id VARCHAR(50),
     value int,
-    Load_date timestamp default TO_TIMESTAMP_NTZ(current_timestamp))
+    Load_date timestamp default TO_TIMESTAMP_NTZ(current_timestamp));
 
-// Load the parquet data
+// Load the parquet data into a snowflake relational table
 COPY INTO OUR_FIRST_DB.PUBLIC.PARQUET_DATA
     FROM (SELECT 
             METADATA$FILE_ROW_NUMBER,

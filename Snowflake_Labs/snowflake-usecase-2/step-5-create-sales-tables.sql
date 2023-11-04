@@ -1,10 +1,20 @@
-/* Creating the Database Named: Maven_market */
-CREATE DATABASE maven_market;
-/* Creating a Schema for Sales Data */
-CREATE SCHEMA sales;
-
-/* Creating the TABLES */
-create or replace table maven_market.sales.Customers(
+/* Defining Sales Schema Tables */
+-- Login as SALES_DBA and create the 
+-- Sales DBA - Dasun
+-- Verify that he can see the dev_maven_market.sales database and schema
+use role sales_dba;
+use warehouse sales_wh;
+SHOW DATABASES;
+-- Selecting the dev_maven_market database
+USE dev_maven_market;
+-- Listing the Schemas
+SHOW SCHEMAS;
+-- Selecting Sales Schema for Table Creation
+USE dev_maven_market.sales;
+select current_role(), current_warehouse, current_database(),current_schema();
+-- Creating Tables
+-- Customers Table
+create or replace table dev_maven_market.sales.Customers(
     customer_id number not null,
     customer_acct_number number not null,
     first_name string,
@@ -27,8 +37,8 @@ create or replace table maven_market.sales.Customers(
     homeowner string,
     constraint PK_Customers primary key (customer_id)
 );
-
-create or replace table maven_market.sales.products (
+-- Products Table
+create or replace table dev_maven_market.sales.products (
     product_id number not null,
     product_brand string,
     product_name string, 
@@ -40,15 +50,15 @@ create or replace table maven_market.sales.products (
     low_fat number,
     constraint PK_Products primary key (product_id)
 );
-
-create or replace table maven_market.sales.regions(
+-- Regions Table
+create or replace table dev_maven_market.sales.regions(
     region_id number not null,
     sales_district string,
     sales_region string,
     constraint PK_Regions primary key (region_id)
 );
-
-create or replace table maven_market.sales.Stores(
+-- Stores Table
+create or replace table dev_maven_market.sales.Stores(
     store_id number not null,
     region_id number,
     store_type string,
@@ -65,14 +75,8 @@ create or replace table maven_market.sales.Stores(
     constraint PK_Stores primary key (store_id)
 );
 
-create or replace table maven_market.sales.Returns(
-    return_date date,
-    product_id number,
-    store_id number,
-    quantity number    
-);
-
-create or replace table maven_market.sales.Transactions(
+-- Transactions Table
+create or replace table dev_maven_market.sales.Transactions(
     transaction_date date,
     stock_date date,
     product_id number,
@@ -81,4 +85,5 @@ create or replace table maven_market.sales.Transactions(
     quantity number
 );
 
-
+--Granting Access to all tables to SALES_ANALYSTS Role
+GRANT SELECT ON ALL TABLES IN SCHEMA dev_maven_market.sales TO ROLE SALES_ANALYST;

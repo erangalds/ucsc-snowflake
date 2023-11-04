@@ -1,5 +1,9 @@
 /* Creating separate Views to share with Marketting Team */
 /* Login as Dasun */
+use role sales_dba;
+use warehouse sales_wh;
+use schema dev_maven_market.sales;
+select current_role(), current_warehouse(), current_database(), current_schema();
 
 -- Year Month / Product / Total Sales
 CREATE OR REPLACE VIEW dev_maven_market.sales.PRODUCT_SALES_OVER_TIME AS 
@@ -16,6 +20,7 @@ YEAR,
 MONTH,
 PRODUCT_NAME;
 
+select * from dev_maven_market.sales.PRODUCT_SALES_OVER_TIME;
 
 -- Year Month / STORE / Total Sales
 CREATE OR REPLACE VIEW dev_maven_market.sales.STORE_SALES_OVER_TIME AS 
@@ -33,6 +38,8 @@ GROUP BY
 YEAR,
 MONTH,
 STORE_NAME;
+
+select * from dev_maven_market.sales.STORE_SALES_OVER_TIME;
 
 -- Year Month / PRODUCT_NAME / STORE / Total Sales
 CREATE OR REPLACE VIEW dev_maven_market.sales.PRODUCT_SALES_IN_STORES_OVER_TIME AS 
@@ -53,6 +60,7 @@ MONTH,
 PRODUCT_NAME,
 STORE_NAME;
 
+select * from dev_maven_market.sales.PRODUCT_SALES_IN_STORES_OVER_TIME;
 
 -- GRANT PERMISSION TO THESE VIEWS TO THE MARKETTING_ANALYSTS
 GRANT SELECT ON VIEW dev_maven_market.sales.PRODUCT_SALES_OVER_TIME TO ROLE MARKETTING_ANALYST;
