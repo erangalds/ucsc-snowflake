@@ -129,5 +129,5 @@ COPY INTO OUR_FIRST_DB.PUBLIC.PARQUET_DATA
             $1:"value"::int,
             TO_TIMESTAMP_NTZ(current_timestamp)
         FROM @MANAGE_DB.EXTERNAL_STAGES.PARQUETSTAGE);
-
+-- Validating the data load
 SELECT * FROM OUR_FIRST_DB.PUBLIC.PARQUET_DATA;
