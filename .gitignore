@@ -1,3 +1,4 @@
-%userprofile%
+%userprofile%/
+%userprofile%/.snowsql/log
 snowflake-python-automation/.env
 venv

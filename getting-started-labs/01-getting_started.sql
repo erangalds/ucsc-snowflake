@@ -1,6 +1,7 @@
 -- Checking the current context
 select
     current_role();
+    
 select
     current_warehouse();
 select
@@ -12,7 +13,9 @@ select
 select
     current_schemas();
 -- Setting the curent context
-    use database snowflake_sample_data;
+show databases;
+use database snowflake_sample_data;
+
 select
     current_database();
 select
@@ -26,7 +29,10 @@ use schema tpcds_sf10tcl;
 select
     current_schemas();
 
+show tables;
+
 -- Directly selecting a schema
+select current_role();
 create or replace database myfirst_db;
 
 show databases;

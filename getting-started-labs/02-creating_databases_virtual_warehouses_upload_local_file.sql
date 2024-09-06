@@ -15,6 +15,7 @@ select
 create warehouse CH2_WH with warehouse_size = medium
     auto_suspend = 300 auto_resume = true initially_suspended = true;
 
+show warehouses;
 -- creating a new virtual multicluster warehouse 
 create warehouse CH2_MultiCluster_WH with 
     warehouse_size = medium
@@ -25,6 +26,7 @@ create warehouse CH2_MultiCluster_WH with
     min_cluster_count = 1
     scaling_policy = standard;
 
+show warehouses;
 describe warehouse CH2_MultiCluster_WH;
 
 show warehouses;
@@ -94,8 +96,8 @@ COPY INTO emp_basic
 SELECT * FROM emp_basic;
 
 INSERT INTO emp_basic VALUES
-   ('Clementine','Adamou','cadamou@sf_tuts.com','10510 Sachs Road','Klenak','2017-9-22') ,
-   ('Marlowe','De Anesy','madamouc@sf_tuts.co.uk','36768 Northfield Plaza','Fangshan','2017-1-26');
+   ('Eranga','De Silva','eranga@sf_tuts.com','10510 Sachs Road','Klenak','2017-9-22') ,
+   ('Yometh','De Silva','yometh@sf_tuts.co.uk','36768 Northfield Plaza','Fangshan','2017-1-26');
 
 SELECT email FROM emp_basic WHERE email LIKE '%.uk';
 

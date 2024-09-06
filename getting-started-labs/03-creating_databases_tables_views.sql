@@ -5,14 +5,17 @@ use warehouse compute_wh;
 -- Create a pernant database
 -- Below are the mainly used key words to manage databases 
 -- CREATE DATABSE / ALTER DATABASE / DROP DATABASE / SHOW DATABASES 
-create or replace transient database DEMO3A_DB
+create or replace database DEMO3A_DB
 comment = 'Permanent Database for Exercises'; 
 -- comment option can specify some description of the databse
+show databases;
+select current_database();
 
 -- Create a transient database
 create or replace transient database DEMO3B_DB
 comment = 'Transient Database for Exercises';
-
+select current_database();
+show databases;
 use role accountadmin;
 show databases;
 
@@ -22,6 +25,7 @@ show databases;
 
 -- Let's now specify the data_retention_time_in_days while creating the database 
 use role sysadmin;
+
 alter database demo3a_db 
 set data_retention_time_in_days=10;
 

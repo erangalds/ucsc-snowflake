@@ -52,3 +52,74 @@
 2023-10-26 06:43:42,634 (8456/MainThread) __main__ DEBUG      bootstrap:1038 - Downloading https://sfc-repo.snowflakecomputing.com/snowsql/1.2/windows_x86_64/snowsql-1.2.29-windows_x86_64.zip
 2023-10-26 06:43:42,774 (8456/MainThread) __main__ DEBUG      bootstrap:1048 - The signature was found: https://sfc-repo.snowflakecomputing.com/snowsql/1.2/windows_x86_64/snowsql-1.2.29-windows_x86_64.zip.signature
 2023-10-26 06:43:44,020 (8456/MainThread) __main__ INFO      bootstrap:1097 - Verified the signature. Downloaded snowsql is valid.
+2024-09-06 09:48:23,773 (32964/MainThread) snowflake.cli.common.util_cli DEBUG       util_cli:725  - Initialized logging. Log file '%userprofile%\\.snowsql\\log_bootstrap', Namespaces: ['snowflake.cli', 'snowflake.connector', 'botocore', 'azure', '__main__', 'eventloop', 'sqlexecute']
+2024-09-06 09:48:23,787 (32964/MainThread) snowflake.cli.common.util_cli DEBUG       util_cli:744  - cacert?: C:\Users\erang\AppData\Local\Temp\_MEI395282\base_library.zip\cacert.pem, C:\Users\erang\AppData\Local\Temp\_MEI395282\base_library.zip\certifi\cacert.pem
+2024-09-06 09:48:23,788 (32964/MainThread) snowflake.cli.common.util_cli DEBUG       util_cli:744  - cacert?: C:\Users\erang\AppData\Local\Temp\_MEI395282\lib-dynload\cacert.pem, C:\Users\erang\AppData\Local\Temp\_MEI395282\lib-dynload\certifi\cacert.pem
+2024-09-06 09:48:23,788 (32964/MainThread) snowflake.cli.common.util_cli DEBUG       util_cli:744  - cacert?: C:\Users\erang\AppData\Local\Temp\_MEI395282\cacert.pem, C:\Users\erang\AppData\Local\Temp\_MEI395282\certifi\cacert.pem
+2024-09-06 09:48:23,788 (32964/MainThread) snowflake.cli.common.util_cli INFO       util_cli:752  - cacert.pem is set to REQUESTS_CA_BUNDLE: C:\Users\erang\AppData\Local\Temp\_MEI395282\certifi\cacert.pem
+2024-09-06 09:48:23,789 (32964/MainThread) __main__ DEBUG      bootstrap:347  - proxy_host:None, proxy_port: None, proxy_user: None, proxy_password:False
+2024-09-06 09:48:23,789 (32964/MainThread) __main__ INFO      bootstrap:352  - no autoupgrade option: False
+2024-09-06 09:48:23,789 (32964/MainThread) __main__ INFO      bootstrap:354  - version: None, ret_options: None
+2024-09-06 09:48:23,790 (32964/MainThread) __main__ DEBUG      bootstrap:752  - No deletion happened. The number of snowsql is still less than 5
+2024-09-06 09:48:23,795 (32964/MainThread) __main__ DEBUG      bootstrap:367  - can we upgrade?: True
+2024-09-06 09:48:23,795 (32964/MainThread) __main__ INFO      bootstrap:372  - auto upgrade without version
+2024-09-06 09:48:23,796 (32964/MainThread) __main__ DEBUG      bootstrap:908  - Checking Repository: https://sfc-repo.snowflakecomputing.com/snowsql/1.2/windows_x86_64/index.json
+2024-09-06 09:48:24,097 (32964/MainThread) __main__ DEBUG      bootstrap:924  - List Objects: [
+    "snowsql-1.2.32-windows_x86_64.zip",
+    "snowsql-1.2.31-windows_x86_64.zip",
+    "snowsql-1.2.30-windows_x86_64.zip",
+    "snowsql-1.2.29-windows_x86_64.zip",
+    "snowsql-1.2.28-windows_x86_64.zip",
+    "snowsql-1.2.27-windows_x86_64.zip",
+    "snowsql-1.2.26-windows_x86_64.zip",
+    "snowsql-1.2.24-windows_x86_64.zip",
+    "snowsql-1.2.23-windows_x86_64.zip",
+    "snowsql-1.2.22-windows_x86_64.zip",
+    "snowsql-1.2.21-windows_x86_64.zip",
+    "snowsql-1.2.20-windows_x86_64.zip",
+    "snowsql-1.2.19-windows_x86_64.zip",
+    "snowsql-1.2.18-windows_x86_64.zip",
+    "snowsql-1.2.17-windows_x86_64.zip",
+    "snowsql-1.2.16-windows_x86_64.zip",
+    "snowsql-1.2.15-windows_x86_64.zip",
+    "snowsql-1.2.14-windows_x86_64.zip",
+    "snowsql-1.2.13-windows_x86_64.zip",
+    "snowsql-1.2.12-windows_x86_64.zip",
+    "snowsql-1.2.11-windows_x86_64.zip",
+    "snowsql-1.2.10-windows_x86_64.zip",
+    "snowsql-1.2.9-windows_x86_64.zip",
+    "snowsql-1.2.8-windows_x86_64.zip",
+    "snowsql-1.2.7-windows_x86_64.zip",
+    "snowsql-1.2.5-windows_x86_64.zip",
+    "snowsql-1.2.4-windows_x86_64.zip",
+    "snowsql-1.2.3-windows_x86_64.zip",
+    "snowsql-1.2.2-windows_x86_64.zip",
+    "snowsql-1.2.1-windows_x86_64.zip",
+    "snowsql-1.2.0-windows_x86_64.zip"
+]
+2024-09-06 09:48:24,097 (32964/MainThread) __main__ DEBUG      bootstrap:947  - extracting from sfc-repo bucket
+2024-09-06 09:48:24,098 (32964/MainThread) __main__ DEBUG      bootstrap:810  - Available snowsql files: ['1.2/windows_x86_64/snowsql-1.2.32-windows_x86_64.zip', '1.2/windows_x86_64/snowsql-1.2.31-windows_x86_64.zip', '1.2/windows_x86_64/snowsql-1.2.30-windows_x86_64.zip', '1.2/windows_x86_64/snowsql-1.2.29-windows_x86_64.zip', '1.2/windows_x86_64/snowsql-1.2.28-windows_x86_64.zip', '1.2/windows_x86_64/snowsql-1.2.27-windows_x86_64.zip', '1.2/windows_x86_64/snowsql-1.2.26-windows_x86_64.zip', '1.2/windows_x86_64/snowsql-1.2.24-windows_x86_64.zip', '1.2/windows_x86_64/snowsql-1.2.23-windows_x86_64.zip', '1.2/windows_x86_64/snowsql-1.2.22-windows_x86_64.zip', '1.2/windows_x86_64/snowsql-1.2.21-windows_x86_64.zip', '1.2/windows_x86_64/snowsql-1.2.20-windows_x86_64.zip', '1.2/windows_x86_64/snowsql-1.2.19-windows_x86_64.zip', '1.2/windows_x86_64/snowsql-1.2.18-windows_x86_64.zip', '1.2/windows_x86_64/snowsql-1.2.17-windows_x86_64.zip', '1.2/windows_x86_64/snowsql-1.2.16-windows_x86_64.zip', '1.2/windows_x86_64/snowsql-1.2.15-windows_x86_64.zip', '1.2/windows_x86_64/snowsql-1.2.14-windows_x86_64.zip', '1.2/windows_x86_64/snowsql-1.2.13-windows_x86_64.zip', '1.2/windows_x86_64/snowsql-1.2.12-windows_x86_64.zip', '1.2/windows_x86_64/snowsql-1.2.11-windows_x86_64.zip', '1.2/windows_x86_64/snowsql-1.2.10-windows_x86_64.zip', '1.2/windows_x86_64/snowsql-1.2.9-windows_x86_64.zip', '1.2/windows_x86_64/snowsql-1.2.8-windows_x86_64.zip', '1.2/windows_x86_64/snowsql-1.2.7-windows_x86_64.zip', '1.2/windows_x86_64/snowsql-1.2.5-windows_x86_64.zip', '1.2/windows_x86_64/snowsql-1.2.4-windows_x86_64.zip', '1.2/windows_x86_64/snowsql-1.2.3-windows_x86_64.zip', '1.2/windows_x86_64/snowsql-1.2.2-windows_x86_64.zip', '1.2/windows_x86_64/snowsql-1.2.1-windows_x86_64.zip', '1.2/windows_x86_64/snowsql-1.2.0-windows_x86_64.zip']
+2024-09-06 09:48:24,098 (32964/MainThread) __main__ DEBUG      bootstrap:811  - snowsql file: 1.2/windows_x86_64/snowsql-1.2.32-windows_x86_64.zip
+2024-09-06 09:48:24,099 (32964/MainThread) __main__ DEBUG      bootstrap:625  - Latest version: 1.2.32 in remote
+2024-09-06 09:48:24,099 (32964/MainThread) __main__ INFO      bootstrap:249  - Recorded autoupgrade status
+2024-09-06 09:48:24,100 (32964/MainThread) __main__ DEBUG      bootstrap:830  - Running C:\Users\erang\.snowsql\1.2.32\snowsql.exe
+2024-09-06 09:49:34,353 (9652/MainThread) snowflake.cli.common.util_cli DEBUG       util_cli:733  - Initialized logging. Log file '%userprofile%\\.snowsql\\log_bootstrap', Namespaces: ['snowflake.cli', 'snowflake.connector', 'botocore', 'azure', '__main__', 'eventloop', 'sqlexecute']
+2024-09-06 09:49:34,354 (9652/MainThread) snowflake.cli.common.util_cli DEBUG       util_cli:752  - cacert?: C:\Users\erang\AppData\Local\Temp\_MEI404122\base_library.zip\cacert.pem, C:\Users\erang\AppData\Local\Temp\_MEI404122\base_library.zip\certifi\cacert.pem
+2024-09-06 09:49:34,354 (9652/MainThread) snowflake.cli.common.util_cli DEBUG       util_cli:752  - cacert?: C:\Users\erang\AppData\Local\Temp\_MEI404122\lib-dynload\cacert.pem, C:\Users\erang\AppData\Local\Temp\_MEI404122\lib-dynload\certifi\cacert.pem
+2024-09-06 09:49:34,354 (9652/MainThread) snowflake.cli.common.util_cli DEBUG       util_cli:752  - cacert?: C:\Users\erang\AppData\Local\Temp\_MEI404122\cacert.pem, C:\Users\erang\AppData\Local\Temp\_MEI404122\certifi\cacert.pem
+2024-09-06 09:49:34,354 (9652/MainThread) snowflake.cli.common.util_cli INFO       util_cli:760  - cacert.pem is set to REQUESTS_CA_BUNDLE: C:\Users\erang\AppData\Local\Temp\_MEI404122\certifi\cacert.pem
+2024-09-06 09:49:34,355 (9652/MainThread) __main__ DEBUG      bootstrap:347  - proxy_host:None, proxy_port: None, proxy_user: None, proxy_password:****
+2024-09-06 09:49:34,355 (9652/MainThread) __main__ INFO      bootstrap:352  - no autoupgrade option: True
+2024-09-06 09:49:34,355 (9652/MainThread) __main__ INFO      bootstrap:354  - version: None, ret_options: None
+2024-09-06 09:49:34,355 (9652/MainThread) __main__ INFO      bootstrap:385  - no auto upgrade without version
+2024-09-06 09:49:34,356 (9652/MainThread) __main__ DEBUG      bootstrap:829  - Running C:\Users\erang\.snowsql\1.2.32\snowsql.exe
+2024-09-06 09:50:25,924 (40728/MainThread) snowflake.cli.common.util_cli DEBUG       util_cli:733  - Initialized logging. Log file '%userprofile%\\.snowsql\\log_bootstrap', Namespaces: ['snowflake.cli', 'snowflake.connector', 'botocore', 'azure', '__main__', 'eventloop', 'sqlexecute']
+2024-09-06 09:50:25,925 (40728/MainThread) snowflake.cli.common.util_cli DEBUG       util_cli:752  - cacert?: C:\Users\erang\AppData\Local\Temp\_MEI396842\base_library.zip\cacert.pem, C:\Users\erang\AppData\Local\Temp\_MEI396842\base_library.zip\certifi\cacert.pem
+2024-09-06 09:50:25,925 (40728/MainThread) snowflake.cli.common.util_cli DEBUG       util_cli:752  - cacert?: C:\Users\erang\AppData\Local\Temp\_MEI396842\lib-dynload\cacert.pem, C:\Users\erang\AppData\Local\Temp\_MEI396842\lib-dynload\certifi\cacert.pem
+2024-09-06 09:50:25,925 (40728/MainThread) snowflake.cli.common.util_cli DEBUG       util_cli:752  - cacert?: C:\Users\erang\AppData\Local\Temp\_MEI396842\cacert.pem, C:\Users\erang\AppData\Local\Temp\_MEI396842\certifi\cacert.pem
+2024-09-06 09:50:25,925 (40728/MainThread) snowflake.cli.common.util_cli INFO       util_cli:760  - cacert.pem is set to REQUESTS_CA_BUNDLE: C:\Users\erang\AppData\Local\Temp\_MEI396842\certifi\cacert.pem
+2024-09-06 09:50:25,926 (40728/MainThread) __main__ DEBUG      bootstrap:347  - proxy_host:None, proxy_port: None, proxy_user: None, proxy_password:****
+2024-09-06 09:50:25,926 (40728/MainThread) __main__ INFO      bootstrap:352  - no autoupgrade option: True
+2024-09-06 09:50:25,926 (40728/MainThread) __main__ INFO      bootstrap:354  - version: None, ret_options: None
+2024-09-06 09:50:25,926 (40728/MainThread) __main__ INFO      bootstrap:385  - no auto upgrade without version
+2024-09-06 09:50:25,927 (40728/MainThread) __main__ DEBUG      bootstrap:829  - Running C:\Users\erang\.snowsql\1.2.32\snowsql.exe
