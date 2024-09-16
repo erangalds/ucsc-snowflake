@@ -12,7 +12,7 @@ select
 select 
     current_role();
 -- creating a new virtual warehouse
-create warehouse CH2_WH with warehouse_size = medium
+create  warehouse if not exists CH2_WH with warehouse_size = medium
     auto_suspend = 300 auto_resume = true initially_suspended = true;
 
 show warehouses;
@@ -64,6 +64,8 @@ CREATE OR REPLACE DATABASE sf_tuts;
 -- checking the current database and schema 
 SELECT CURRENT_DATABASE(), CURRENT_SCHEMA();
 
+use schema sf_tuts.public;
+
 CREATE OR REPLACE TABLE emp_basic (
   first_name STRING ,
   last_name STRING ,
@@ -81,12 +83,16 @@ CREATE OR REPLACE WAREHOUSE sf_tuts_wh WITH
 
 SELECT CURRENT_WAREHOUSE();
 -- uploading the file into a table stage 
+-- Below is the example of PUT command with the full path to the files
+-- PUT file://D:\learning\ucsc-snowflake\getting-started-labs\data\employees0*.csv @sf_tuts.public.%emp_basic;
 
-PUT file://D:\snowflake\getting-started\employees0*.csv @sf_tuts.public.%emp_basic;
+-- Below is the PUT command with relative path to the files
+PUT file://getting-started-labs\data\employees0*.csv @sf_tuts.public.%emp_basic;
 
 -- @<namespace>.%<table_name>
 LIST @sf_tuts.public.%emp_basic;
-
+-- If you want to remove the files from a stage we can use REMOVE command
+--REMOVE @sf_tuts.public.%emp_basic;
 COPY INTO emp_basic
   FROM @%emp_basic
   FILE_FORMAT = (type = csv field_optionally_enclosed_by='"')

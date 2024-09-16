@@ -123,3 +123,13 @@
 2024-09-06 09:50:25,926 (40728/MainThread) __main__ INFO      bootstrap:354  - version: None, ret_options: None
 2024-09-06 09:50:25,926 (40728/MainThread) __main__ INFO      bootstrap:385  - no auto upgrade without version
 2024-09-06 09:50:25,927 (40728/MainThread) __main__ DEBUG      bootstrap:829  - Running C:\Users\erang\.snowsql\1.2.32\snowsql.exe
+2024-09-12 09:34:51,772 (2396/MainThread) snowflake.cli.common.util_cli DEBUG       util_cli:733  - Initialized logging. Log file '%userprofile%\\.snowsql\\log_bootstrap', Namespaces: ['snowflake.cli', 'snowflake.connector', 'botocore', 'azure', '__main__', 'eventloop', 'sqlexecute']
+2024-09-12 09:34:51,786 (2396/MainThread) snowflake.cli.common.util_cli DEBUG       util_cli:752  - cacert?: C:\Users\erang\AppData\Local\Temp\_MEI258002\base_library.zip\cacert.pem, C:\Users\erang\AppData\Local\Temp\_MEI258002\base_library.zip\certifi\cacert.pem
+2024-09-12 09:34:51,786 (2396/MainThread) snowflake.cli.common.util_cli DEBUG       util_cli:752  - cacert?: C:\Users\erang\AppData\Local\Temp\_MEI258002\lib-dynload\cacert.pem, C:\Users\erang\AppData\Local\Temp\_MEI258002\lib-dynload\certifi\cacert.pem
+2024-09-12 09:34:51,786 (2396/MainThread) snowflake.cli.common.util_cli DEBUG       util_cli:752  - cacert?: C:\Users\erang\AppData\Local\Temp\_MEI258002\cacert.pem, C:\Users\erang\AppData\Local\Temp\_MEI258002\certifi\cacert.pem
+2024-09-12 09:34:51,787 (2396/MainThread) snowflake.cli.common.util_cli INFO       util_cli:760  - cacert.pem is set to REQUESTS_CA_BUNDLE: C:\Users\erang\AppData\Local\Temp\_MEI258002\certifi\cacert.pem
+2024-09-12 09:34:51,787 (2396/MainThread) __main__ DEBUG      bootstrap:347  - proxy_host:None, proxy_port: None, proxy_user: None, proxy_password:****
+2024-09-12 09:34:51,787 (2396/MainThread) __main__ INFO      bootstrap:352  - no autoupgrade option: True
+2024-09-12 09:34:51,787 (2396/MainThread) __main__ INFO      bootstrap:354  - version: None, ret_options: None
+2024-09-12 09:34:51,788 (2396/MainThread) __main__ INFO      bootstrap:385  - no auto upgrade without version
+2024-09-12 09:34:51,792 (2396/MainThread) __main__ DEBUG      bootstrap:829  - Running C:\Users\erang\.snowsql\1.2.32\snowsql.exe

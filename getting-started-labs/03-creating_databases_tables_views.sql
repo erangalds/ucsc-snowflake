@@ -1,5 +1,6 @@
 use role sysadmin;
 use warehouse compute_wh;
+select current_user(), current_role(), current_warehouse();
 
 -- Creating and Managing Snowflake Databases 
 -- Create a pernant database
@@ -25,7 +26,7 @@ show databases;
 
 -- Let's now specify the data_retention_time_in_days while creating the database 
 use role sysadmin;
-
+select current_role(), current_database(), current_warehouse();
 alter database demo3a_db 
 set data_retention_time_in_days=10;
 
@@ -41,12 +42,15 @@ create or replace table demo3b_db.public.summary
     customer_amt number
 );
 
+select current_database(), current_schema();
 -- transient schema tables will be transient by default
 show tables;
 
 -- SNOWFLAKE SCHEMAS 
 -- creating snowflake schemas
 use role sysadmin;use database demo3a_db;
+select current_database(), current_schema();
+show schemas;
 create or replace schema banking;
 
 create or replace schema demo3a_db.banking2;
@@ -62,6 +66,8 @@ show schemas;
 use role sysadmin;
 create or replace schema demo3b_db.banking;
 
+show tables;
+show schemas;
 alter table demo3b_db.public.summary
 rename to demo3b_db.banking.summary;
 
@@ -77,6 +83,8 @@ create or replace schema MSCHEMA with managed access;
 show schemas;
 
 use schema information_schema;
+show tables;
+show views;
 
 --  Account Views in INFORMATION_SCHEMA
 select * from demo3a_db.information_schema.applicable_roles;
@@ -127,12 +135,30 @@ USE DATABASE SNOWFLAKE;
 USE SCHEMA ACCOUNT_USAGE;
 USE WAREHOUSE COMPUTE_WH;
 
+use role accountadmin;
+select current_database(), current_schema();
+
 SELECT start_time::date AS USAGE_DATE, WAREHOUSE_NAME,
 SUM(credits_used) AS TOTAL_CREDITS_CONSUMED
-FROM warehouse_metering_history
+FROM information_schema.warehouse_metering_history
 WHERE start_time >= date_trunc(Month, current_date)
 GROUP BY 1,2
 ORDER BY 2,1;
+
+SELECT 
+    WAREHOUSE_NAME,
+    SUM(CREDITS_USED) AS TOTAL_CREDITS_USED,
+    SUM(CREDITS_USED_COMPUTE) AS TOTAL_COMPUTE_CREDITS,
+    SUM(CREDITS_USED_CLOUD_SERVICES) AS TOTAL_CLOUD_SERVICE_CREDITS
+FROM 
+    TABLE(INFORMATION_SCHEMA.WAREHOUSE_METERING_HISTORY(
+        DATE_RANGE_START => DATEADD('day', -30, CURRENT_DATE)
+    ))
+GROUP BY 
+    WAREHOUSE_NAME
+ORDER BY 
+    TOTAL_CREDITS_USED DESC;
+
 
 select current_database();
 
@@ -177,3 +203,13 @@ use database demo3b_db;
 create or replace file format ff_json type = json;
 
 create or replace temporary stage banking_stg file_format = ff_json;
+
+show warehouses;
+alter warehouse compute_wh suspend;
+
+show databases;
+
+drop database demo3a_db;
+drop database demo3b_db;
+
+show warehouses;
