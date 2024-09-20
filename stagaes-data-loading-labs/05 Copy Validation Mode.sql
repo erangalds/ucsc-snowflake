@@ -8,6 +8,8 @@ use role sysadmin;
 -- Creating a new database for the lab
 // Prepare database & table
 CREATE OR REPLACE DATABASE COPY_DB;
+
+select current_database(), current_schema();
 -- Let's create a table as well
 CREATE OR REPLACE TABLE  COPY_DB.PUBLIC.ORDERS (
     ORDER_ID VARCHAR(30),

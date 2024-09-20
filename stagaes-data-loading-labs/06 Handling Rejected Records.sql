@@ -15,7 +15,7 @@ COPY INTO COPY_DB.PUBLIC.ORDERS
     pattern='.*Order.*'
     VALIDATION_MODE = RETURN_ERRORS;
 -- For each failed record we can see from which file the error record was found as well as the actual error record
--- We can't any valid records out
+-- We can't get any error records out
 COPY INTO COPY_DB.PUBLIC.ORDERS
     FROM @COPY_DB.PUBLIC.aws_stage_copy
     file_format= (type = csv field_delimiter=',' skip_header=1)
@@ -43,25 +43,32 @@ COPY INTO COPY_DB.PUBLIC.ORDERS
     VALIDATION_MODE = RETURN_ERRORS;
 
 select * from table(result_scan(last_query_id()));
-SET qid = LAST_QUERY_ID();
--- 01af9f22-0000-7883-0003-df4a0012308e
+select REJECTED_RECORD from table(result_scan(last_query_id()));
+SET qid = LAST_QUERY_ID(); -- 01b727be-0000-bb10-0003-df4a002e215a
+select $qid; --01b727be-0000-bb10-0003-df4a002e2156 
+--01b727be-0000-bb0f-0003-df4a002e14ce
 CREATE OR REPLACE TABLE rejected AS 
 SELECT REJECTED_RECORD 
 FROM TABLE (RESULT_SCAN ($qid));
 
-
-// Storing rejected /failed results in a table
 CREATE OR REPLACE TABLE rejected AS 
-select rejected_record from table(result_scan(last_query_id()));
+SELECT REJECTED_RECORD 
+FROM TABLE (RESULT_SCAN ('01b727be-0000-bb0f-0003-df4a002e14ce'));
 
+-- 01b727c3-0000-bb10-0003-df4a002e2172
+CREATE OR REPLACE TABLE rejected_detailed AS 
+SELECT FILE,ERROR, REJECTED_RECORD 
+FROM TABLE (RESULT_SCAN ('01b727c3-0000-bb10-0003-df4a002e2172'));
+
+select * from rejected_detailed;
 
 
 SELECT * FROM rejected;
 
-INSERT INTO rejected
-select rejected_record from table(result_scan(last_query_id()));
+--INSERT INTO rejected
+--select rejected_record from table(result_scan(last_query_id()));
 
-SELECT * FROM rejected;
+--SELECT * FROM rejected;
 
 ---- 2) Saving rejected files without VALIDATION_MODE ---- 
 CREATE OR REPLACE TABLE  COPY_DB.PUBLIC.ORDERS (
@@ -77,11 +84,11 @@ COPY INTO COPY_DB.PUBLIC.ORDERS
     file_format= (type = csv field_delimiter=',' skip_header=1)
     pattern='.*Order.*'
     ON_ERROR=CONTINUE;
-  
-  
-create or replace table rejected_v2 as 
-select * from table(validate(orders, job_id => '_last'));
 
+-- If we want to view the errors then we can just run the select command
+select * from table(validate(orders, job_id => '_last'));
+-- If we want to save the errors to another table.  
+create or replace table rejected_v2 as 
 select * from table(validate(orders, job_id => '_last'));
 
 select * from rejected_v2;

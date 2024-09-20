@@ -142,3 +142,4 @@ Note that at least one file is loaded regardless of the value specified for SIZE
 -- Validate
 SELECT * FROM OUR_FIRST_DB.PUBLIC.ORDERS_EX;
 -- We can see the last file got loaded regardless of the SIZE_LIMIT and that's expected behavior
+TRUNCATE TABLE OUR_FIRST_DB.PUBLIC.ORDERS_EX;
