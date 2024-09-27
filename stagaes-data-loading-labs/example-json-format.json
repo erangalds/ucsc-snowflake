@@ -1,0 +1,16 @@
+[
+    {
+        "name": "eranga de silva",
+        "age" : 42,
+        "email" : ["eranga@yahoo.com", "eranga@gmail.com", "eranga@hotmail.com"]
+    },
+    {
+        "name": "yometh de silva",
+        "age" : 7
+    }
+    {
+        "name": "nimasha ranathunga",
+        "age" : 41,
+        "email" : ["nimasha@gmail.com"]
+    }
+]

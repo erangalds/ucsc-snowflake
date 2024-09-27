@@ -41,7 +41,11 @@ COPY INTO COPY_DB.PUBLIC.ORDERS
     file_format= (type = csv field_delimiter=',' skip_header=1)
     pattern='.*Order.*'
     VALIDATION_MODE = RETURN_ERRORS;
-
+--01b727cc-0000-bb10-0003-df4a002e21e6
+--01b727cc-0000-bb0f-0003-df4a002e155a
+select last_query_id();
+select LAST_QUERY_ID(); --01b727ce-0000-bb0f-0003-df4a002e1582  01b727d4-0000-bb10-0003-df4a002e2246
+--01b727d1-0000-bb10-0003-df4a002e221a
 select * from table(result_scan(last_query_id()));
 select REJECTED_RECORD from table(result_scan(last_query_id()));
 SET qid = LAST_QUERY_ID(); -- 01b727be-0000-bb10-0003-df4a002e215a

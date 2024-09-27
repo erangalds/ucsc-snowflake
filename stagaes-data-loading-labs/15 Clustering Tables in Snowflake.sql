@@ -56,24 +56,47 @@ SELECT * FROM COPY_DB.PUBLIC.ORDERS_CACHING;
 /*
 Query Duration	25s
 Rows	225,000,000
-End time	Tue Oct 10 2023
+End time	Fri Sep 27 2024
 Scanned	1.1GB (100%)
+Role	SYSADMIN
+DB/Schema	OUR_FIRST_DB.PUBLIC
+Warehouse	COMPUTE_WH
+*/
+SELECT * FROM COPY_DB.PUBLIC.ORDERS_CACHING;
+/*
+2nd Time
+Query Duration	62ms
+Rows	225,000,000
+End time	Fri Sep 27 2024
+Scanned	0 (0%)
+Role	SYSADMIN
+DB/Schema	OUR_FIRST_DB.PUBLIC
+Warehouse	COMPUTE_WH
  */
+ select * from copy_db.public.orders_caching;
+// Even this above query is considered as a different query, because its in lower case characters
 // Now Let's query with a WHERE Clause
 SELECT * FROM COPY_DB.PUBLIC.ORDERS_CACHING  WHERE DATE = '2020-06-09';
 /*
-Query Duration	798ms
-Rows	97,049
-End time	Tue Oct 10 2023
+The Query took more time than the 2nd Time SELECT * FROM Query
+Query Duration	802ms
+Rows	97,208
+End time	Fri Sep 27 2024
 Scanned	1.1GB (100%)
- */
+Role	SYSADMIN
+DB/Schema	OUR_FIRST_DB.PUBLIC
+Warehouse	COMPUTE_WH
+*/
 SELECT * FROM COPY_DB.PUBLIC.ORDERS_CACHING  WHERE DATE = '2020-09-15';
 /*
-Query Duration	655ms
-Rows	96,546
-End time	Tue Oct 10 2023
+Query Duration	590ms
+Rows	97,736
+End time	Fri Sep 27 2024
 Scanned	1.1GB (100%)
- */
+Role	SYSADMIN
+DB/Schema	OUR_FIRST_DB.PUBLIC
+Warehouse	COMPUTE_WH
+*/
 // Adding Cluster Key & Compare the result
 
 ALTER TABLE COPY_DB.PUBLIC.ORDERS_CACHING CLUSTER BY ( DATE );

@@ -11,6 +11,7 @@ SELECT * FROM information_schema.load_history;
 // Query load history gloabally from SNOWFLAKE database --
 select current_role();
 use role accountadmin;
+select current_role();
 SELECT * FROM snowflake.account_usage.load_history;
 -- we have to elevate the role to accountadmin in order to query the global load_history details from the snowflake database
 

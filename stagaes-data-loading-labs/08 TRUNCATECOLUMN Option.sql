@@ -21,6 +21,8 @@ COPY INTO COPY_DB.PUBLIC.ORDERS
     FROM @COPY_DB.PUBLIC.aws_stage_copy
     file_format= (type = csv field_delimiter=',' skip_header=1)
     pattern='.*Order.*';
+
+select * from copy_db.public.orders;
 -- Query failes because the column character size is lower than the filed value in the file
 -- In such situations, if needed we can enable TRUNCATECOLUMNS option
 -- That will load part of the value in the field to suite the actual column size

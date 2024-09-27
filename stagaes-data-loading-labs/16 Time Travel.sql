@@ -1,6 +1,7 @@
 // Some More Cool Features in Snowflakes - Time Travel 
 // Setting up table
 use role sysadmin;
+select current_role();
 use warehouse compute_wh;
 use database our_first_db;
 select current_role(), current_warehouse(), current_database();
@@ -45,12 +46,12 @@ SET FIRST_NAME = 'Joyen';
 SELECT * FROM OUR_FIRST_DB.public.test;
 -- Now all the records contain Joyen as the first name
 // Using time travel: Method 1 - 2 minutes back
-SELECT * FROM OUR_FIRST_DB.public.test at (OFFSET => -60*5.5);
+SELECT * FROM OUR_FIRST_DB.public.test at (OFFSET => -60*1.75);
 
 select current_timestamp();
-
+//2024-09-27 02:46:35.699 -0700
 // Using time travel: Method 2 - before timestamp
-SELECT * FROM OUR_FIRST_DB.public.test before (timestamp => '2023-10-09 21:30:31.679'::timestamp);
+SELECT * FROM OUR_FIRST_DB.public.test before (timestamp => '2024-09-27 02:45:35.699 -0700'::timestamp);
 
 
 
@@ -76,9 +77,9 @@ SELECT * FROM OUR_FIRST_DB.public.test;
 ALTER SESSION SET TIMEZONE ='UTC';
 SELECT DATEADD(DAY, 1, CURRENT_TIMESTAMP);
 
-// 2022-07-23 04:04:48.149 +0000
+// 2024-09-28 09:50:22.086 +0000
 // Messing up the data deliberately to show time travel 
-select current_timestamp;
+select current_timestamp; //2024-09-27 09:50:40.783 +0000
 -- Keep the timestamp before the mistake
 UPDATE OUR_FIRST_DB.public.test
 SET Job = 'Data Scientist';
@@ -86,7 +87,9 @@ SET Job = 'Data Scientist';
 SELECT * FROM OUR_FIRST_DB.public.test;
 select current_timestamp;
 -- use the time stamp just before the mistake. You might have to adjust the minutes or seconds a little bit to get the results needed.
-SELECT * FROM OUR_FIRST_DB.public.test before (timestamp => '2023-10-10 04:34:00.324'::timestamp);
+-- 01b74eef-0000-bc9d-0003-df4a002f11c2
+-- 2024-09-27 09:51:20.867 +0000
+SELECT * FROM OUR_FIRST_DB.public.test before (timestamp => '2024-09-27 09:50:20.867 +0000'::timestamp);
 
 // Using time travel: Method 3 - before Query ID
 
@@ -118,4 +121,4 @@ SELECT * FROM OUR_FIRST_DB.public.test;
 -- There you will find the query id
 -- That's what we need to use below to access the data before the mistake. 
 -- This is the best and the easiest way to access the data before the mistake
-SELECT * FROM OUR_FIRST_DB.public.test before (statement => '01af8c15-0000-77d4-0003-df4a0011e662');
+SELECT * FROM OUR_FIRST_DB.public.test before (statement => '01b74ef1-0000-bc9d-0003-df4a002f11e2');

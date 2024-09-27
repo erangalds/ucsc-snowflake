@@ -23,13 +23,12 @@ COPY INTO COPY_DB.PUBLIC.ORDERS
     FROM @COPY_DB.PUBLIC.aws_stage_copy
     file_format= (type = csv field_delimiter=',' skip_header=1)
     pattern='.*Order.*';
-
+SELECT * FROM ORDERS;    
 // Not possible to load file that have been loaded and data has not been modified
 COPY INTO COPY_DB.PUBLIC.ORDERS
     FROM @COPY_DB.PUBLIC.aws_stage_copy
     file_format= (type = csv field_delimiter=',' skip_header=1)
     pattern='.*Order.*';
-   
 
 SELECT * FROM ORDERS;    
 

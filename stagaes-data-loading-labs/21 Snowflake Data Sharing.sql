@@ -15,7 +15,7 @@ ORDER_ID	VARCHAR(30)
 ,PROFIT	NUMBER(38,0)
 ,QUANTITY	NUMBER(38,0)
 ,CATEGORY	VARCHAR(30)
-,SUBCATEGORY	VARCHAR(30))   
+,SUBCATEGORY	VARCHAR(30));   
 
 
 // Load data using copy command
@@ -48,7 +48,18 @@ SHOW GRANTS TO SHARE ORDERS_SHARE;
 
 ---- Add Consumer Account ----
 ALTER SHARE ORDERS_SHARE ADD ACCOUNT=<consumer-account-id>;
-ALTER SHARE ORDERS_SHARE ADD ACCOUNT=VW21779;
+use role accountadmin;
+ALTER SHARE ORDERS_SHARE ADD ACCOUNT = BBNIEHE.NO20485;
+ALTER SHARE ORDERS_SHARE ADD ACCOUNT = BBNIEHE.OD04243;
+select current_role();
+SELECT CURRENT_REGION();
+show regions;
+SELECT CURRENT_ACCOUNT();  -- This will return your account name (e.g., my_account)
+use role orgadmin;
+SELECT CURRENT_ORGANIZATION_NAME();      -- This will return your organization name (e.g., my_org)
+
+SHOW ORGANIZATION ACCOUNTS;
+-- QKTWYDN.EI33427
 --VW21779
 -- sharing to a non-business critical account
 ALTER SHARE ORDERS_SHARE ADD ACCOUNT=VW21779

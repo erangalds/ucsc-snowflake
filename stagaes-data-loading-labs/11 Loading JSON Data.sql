@@ -5,8 +5,11 @@
 select current_role();
 use role sysadmin;
 // Create a new Stage
+select current_role();
 CREATE OR REPLACE stage MANAGE_DB.EXTERNAL_STAGES.JSONSTAGE
      url='s3://bucketsnowflake-jsondemo';
+
+LIST @MANAGE_DB.EXTERNAL_STAGES.JSONSTAGE;
 
 // Create a new FILE_FORMAT with TYPE of JSOn
 CREATE OR REPLACE file format MANAGE_DB.FILE_FORMATS.JSONFORMAT
@@ -31,6 +34,7 @@ SELECT * FROM OUR_FIRST_DB.PUBLIC.JSON_RAW;
 SELECT RAW_FILE:city FROM OUR_FIRST_DB.PUBLIC.JSON_RAW;
 // We can specify the Column Number using $1
 SELECT $1:first_name FROM OUR_FIRST_DB.PUBLIC.JSON_RAW;
+SELECT $0:first_name FROM OUR_FIRST_DB.PUBLIC.JSON_RAW;
 
 
 // Selecting attribute/column - formattted
@@ -89,6 +93,11 @@ SELECT
     ARRAY_SIZE(RAW_FILE:prev_company) as prev_company
 FROM OUR_FIRST_DB.PUBLIC.JSON_RAW;
 
+SELECT
+    RAW_FILE:first_name as first_name,
+    ARRAY_SIZE(RAW_FILE:prev_company) as prev_company
+FROM OUR_FIRST_DB.PUBLIC.JSON_RAW;
+
 // Combining the Two Previous Company Records
 SELECT 
     RAW_FILE:id::int as id,  
@@ -112,6 +121,7 @@ SELECT * FROM OUR_FIRST_DB.PUBLIC.JSON_RAW;
 
 
 SELECT 
+    RAW_FILE:first_name as first_name,
      array_size(RAW_FILE:spoken_languages) as spoken_languages
 FROM OUR_FIRST_DB.PUBLIC.JSON_RAW;
 

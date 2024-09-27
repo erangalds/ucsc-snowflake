@@ -25,7 +25,7 @@ SELECT * FROM OUR_FIRST_DB.public.test;
 -- Setting all last names to be Tyson
 UPDATE OUR_FIRST_DB.public.test
 SET LAST_NAME = 'Tyson';
--- Query ID - 01af8c36-0000-7714-0003-df4a0011d6aa
+-- Query ID - 01b74ef3-0000-bc9b-0003-df4a002f09de
 
 SELECT * FROM OUR_FIRST_DB.public.test;
 
@@ -33,22 +33,22 @@ SELECT * FROM OUR_FIRST_DB.public.test;
 -- Setting the job or all to Data Analyst
 UPDATE OUR_FIRST_DB.public.test
 SET JOB = 'Data Analyst';
--- Query ID - 01af8c36-0000-77d4-0003-df4a0011e6be
+-- Query ID - 01b74ef4-0000-bc9b-0003-df4a002f09ee
 
 SELECT * FROM OUR_FIRST_DB.public.test;
 -- Let's bring the Query IDs of the update statements
 -- Before the last UPDATE statement - Second Mistake
-SELECT * FROM OUR_FIRST_DB.public.test before (statement => '01af8c36-0000-77d4-0003-df4a0011e6be');
+SELECT * FROM OUR_FIRST_DB.public.test before (statement => '01b74ef4-0000-bc9b-0003-df4a002f09ee');
 -- We can see that the job is correctly shown but the last name is not. 
 -- Let us get the query Id of first update statement and see
-SELECT * FROM OUR_FIRST_DB.public.test before (statement => '01af8c36-0000-7714-0003-df4a0011d6aa');
+SELECT * FROM OUR_FIRST_DB.public.test before (statement => '01b74ef3-0000-bc9b-0003-df4a002f09de');
 -- We can see the last names also correctly. 
 
 -- Let us now try to restore
 // // // Bad method
 -- Let us mistakenly say did the restoration as below using the query id of the second mistake
 CREATE OR REPLACE TABLE OUR_FIRST_DB.public.test as
-SELECT * FROM OUR_FIRST_DB.public.test before (statement => '01af8c36-0000-77d4-0003-df4a0011e6be');
+SELECT * FROM OUR_FIRST_DB.public.test before (statement => '01b74ef4-0000-bc9b-0003-df4a002f09ee');
 
 // Verifing the restoration
 SELECT * FROM OUR_FIRST_DB.public.test;
@@ -56,7 +56,7 @@ SELECT * FROM OUR_FIRST_DB.public.test;
 
 // We see that we have used a wrong query id to restore the data
 CREATE OR REPLACE TABLE OUR_FIRST_DB.public.test as
-SELECT * FROM OUR_FIRST_DB.public.test before (statement => '01af8c36-0000-7714-0003-df4a0011d6aa');
+SELECT * FROM OUR_FIRST_DB.public.test before (statement => '01b74ef3-0000-bc9b-0003-df4a002f09de');
 -- We now cannot go back in time. 
 -- This is because the key word CREATE OR REPLACE resets the time travel information
 -- Therefore we cannot go back in time to restore the actual data

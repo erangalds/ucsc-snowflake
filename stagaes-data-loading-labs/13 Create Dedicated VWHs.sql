@@ -27,21 +27,26 @@ SCALING_POLICY = 'STANDARD';
 // Create role for Data Scientists & DBAs
 -- Switching to User Admin to create the roles
 use role useradmin;
+select current_role();
 CREATE ROLE DATA_SCIENTIST;
 // Grant usage permission of the warehouse DS_WH to Data Scientist Role
 use role securityadmin;
+select current_role();
 -- Granting permission to use the warehouse DS_WH to Role Data_Sciencetist
 GRANT USAGE ON WAREHOUSE DS_WH TO ROLE DATA_SCIENTIST;
 use role useradmin;
+select current_role();
 CREATE ROLE DBA;
 // Grant usage permission of the warehouse DBA_WH to DBA Role
 use role securityadmin;
+select current_role();
 -- Granting permission to use the warehouse DS_WH to Role DBA
 GRANT USAGE ON WAREHOUSE DBA_WH TO ROLE DBA;
 
 // Setting up users and assigning roles to the users
 // Data Scientists
 use role useradmin;
+select current_role();
 show users;
 -- creating three new users for data science role
 CREATE USER DS1 PASSWORD = 'DS1' LOGIN_NAME = 'DS1' DEFAULT_ROLE='DATA_SCIENTIST' DEFAULT_WAREHOUSE = 'DS_WH'  MUST_CHANGE_PASSWORD = FALSE;
@@ -74,6 +79,16 @@ DROP USER DS3;
 
 DROP ROLE DATA_SCIENTIST;
 DROP ROLE DBA;
+
+DROP WAREHOUSE DS_WH;
+DROP WAREHOUSE DBA_WH;
+
+show warehouses;
+
+use role accountadmin;
+show warehouses;
+use role sysadmin;
+select current_role();
 
 DROP WAREHOUSE DS_WH;
 DROP WAREHOUSE DBA_WH;

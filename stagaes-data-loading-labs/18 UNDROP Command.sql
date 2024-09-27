@@ -110,9 +110,9 @@ files = ('customers.csv');
 SELECT * FROM OUR_FIRST_DB.public.customers;
 -- Making the Mistake again
 UPDATE OUR_FIRST_DB.public.customers
-SET LAST_NAME = 'Tyson';
+SET LAST_NAME = 'Tyson'; // 01b74f00-0000-bc9b-0003-df4a002f0a9a
 UPDATE OUR_FIRST_DB.public.customers
-SET JOB = 'Data Analyst';
+SET JOB = 'Data Analyst'; // 01b74f00-0000-bc9d-0003-df4a002f1296
 -- We have make two mistakes now
 SELECT * FROM OUR_FIRST_DB.public.customers;
 -- Renaming the Original Table to with a New Name
@@ -125,7 +125,7 @@ DESC table OUR_FIRST_DB.public.customers;
 // Correcting the mistake by using the correct query id
 -- We restore the customer table from the customer_wrong table's time travel details
 CREATE OR REPLACE TABLE OUR_FIRST_DB.public.customers as
-SELECT * FROM OUR_FIRST_DB.public.customers_wrong before (statement => '01af8cb5-0000-7714-0003-df4a0011d876');
+SELECT * FROM OUR_FIRST_DB.public.customers_wrong before (statement => '01b74f00-0000-bc9b-0003-df4a002f0a9a');
 
 DESC table OUR_FIRST_DB.public.customers;
 
